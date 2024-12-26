@@ -25,12 +25,12 @@ def search_record(with_id):
             
             if emp_id == with_id:
                 return line
-                break
+
         else:
-            return("No such empployee")
+            return False
 
 def update_record(with_ID):
-    if search_record(with_ID) == "No such empployee":
+    if search_record(with_ID) == False:
         print("No such empployee")
     else:
         with open("employees.txt", 'r') as file:
@@ -46,7 +46,7 @@ def update_record(with_ID):
                     file.write(line)
 
 def del_record(with_Id):
-    if search_record(with_Id) == "No such empployee":
+    if search_record(with_Id) == False:
         return("No such empployee")
     else:
         with open("employees.txt", 'r') as file:
