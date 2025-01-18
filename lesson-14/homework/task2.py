@@ -16,6 +16,7 @@ Company Name TEXT,
 Location TEXT,
 Job_Description TEXT,
 Application Link TEXT
+UNIQUE(job_title, company_name, location)
 );
 """)
         
@@ -25,4 +26,8 @@ def scrape_jobs(url):
     response = requests.get(url)
     soap = BeautifulSoup(response.text, 'html.parser')
     job_listing = []
-    
+    for job_item in soap.find_all('div', class_ = "card-content"):
+        job_title = job_item.find('h2', class_ = 'title is-5').text().strip()
+        company_name = job_item.find('h3', class_ = 'subtitle is-6 company').text().strip()
+        location = job_item.find('p', class_ = 'location').text().strip()
+        
